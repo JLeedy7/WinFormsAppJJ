@@ -28,30 +28,30 @@ namespace WinFormsAppJJ
             txtDueDate.Clear();
         }
 
-        private void lbTaskList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int selectedIndex = lbTaskList.SelectedIndex;
-            string selectedItem = (string)lbTaskList.SelectedItem;
+//        private void lbTaskList_SelectedIndexChanged(object sender, EventArgs e)
+//        {
+////int selectedIndex = lbTaskList.SelectedIndex;
+//            //string selectedItem = (string)lbTaskList.SelectedItem;
 
-            if (selectedIndex == -1)
-            {
-                return;
-            }
+//            if (selectedIndex == -1)
+//            {
+//                return;
+//            }
 
-            if (selectedItem == null)
-            {
-                MessageBox.Show("No item selected at the index.");
-                return;
-            }
+//            if (selectedItem == null)
+//            {
+//                MessageBox.Show("No item selected at the index.");
+//                return;
+//            }
 
-            int id = Int32.Parse(selectedItem.Split(" - ")[0]);
-            var todo = TaskList.Find(t=>t.Id == id);
-            if (todo != null)
-            {
-                todo.IsDone = !todo.IsDone;
-                UpdateListBox();
-            }
-        }
+//            int id = Int32.Parse(selectedItem.Split(" - ")[0]);
+//            var todo = TaskList.Find(t=>t.Id == id);
+//            if (todo != null)
+//            {
+//                todo.IsDone = !todo.IsDone;
+//                UpdateListBox();
+//            }
+//        }
 
         private void gbTaskList_Enter(object sender, EventArgs e)
         {
@@ -87,20 +87,21 @@ namespace WinFormsAppJJ
             Todo myTodo = new Todo(txtTaskDescription.Text, DateTime.Parse(txtDueDate.Text));
 
             TaskList.Add(myTodo);
+            FpTasks.Controls.Add(new TaskControl(myTodo));
             UpdateListBox();
             ClearForm();
         }
 
         public void UpdateListBox()
         {
-            lbTaskList.Items.Clear();
+            //lbTaskList.Items.Clear();
             var list = TaskList
             .OrderBy(t =>t.DueDate)
             .ToList();
 
             for (int i = 0; i < list.Count; i++)
             {
-                lbTaskList.Items.Add(list[i].ToString());
+                //lbTaskList.Items.Add(list[i].ToString());
             }
         }
         private void txtDueDate_TextChanged(object sender, EventArgs e)
